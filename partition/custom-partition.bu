@@ -1,0 +1,14 @@
+variant: openshift
+version: 4.16.0 
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: master
+  name: 98-masters-storage-config
+storage:
+      disks:
+        - device: /dev/vda
+          partitions:
+            - label: myvg0
+              start_mib: 121000 
+              size_mib: 80960
+              number: 6  
