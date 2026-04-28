@@ -46,8 +46,8 @@ flowchart LR
 
     subgraph SERVICES["Services utilitaires"]
         direction TB
-        OMV[omv (s3)\n100.100.0.18]
-        REG[registry (quay proxy)\n100.100.0.142]
+        OMV[omv\n100.100.0.18\ns3]
+        REG[registry\n100.100.0.142\nquay proxy]
     end
 
     LAN --> EDGE
@@ -72,8 +72,10 @@ flowchart LR
 - `lab-o endpoint` = `100.100.0.12`
 
 ### Services utilitaires
-- `omv (s3)` = `100.100.0.18`
-- `registry (quay proxy)` = `100.100.0.142`
+- `omv` = `100.100.0.18`  
+  s3
+- `registry` = `100.100.0.142`  
+  quay proxy
 
 ### OpenShift (`lab.virer.net`)
 - `bootstrap` = `100.100.0.19`
