@@ -8,9 +8,9 @@ flowchart LR
     WAN[Internet / WAN] --> GW[nanopi gateway\n100.100.0.1]
     GW --> LAN[(Homelab LAN\n100.100.0.0/24)]
 
-    subgraph EDGE["Edge / Entree"]
+    subgraph EDGE["Edge / rev proxy"]
         direction TB
-        RP[HAProxy sur rtx]
+        RP[HAProxy on rtx]
         RP10[host / mgmt\n100.100.0.10]
         RP11[frontend lab-a\n100.100.0.11]
         RP12[frontend lab-o\n100.100.0.12]
@@ -19,14 +19,14 @@ flowchart LR
         RP --> RP12
     end
 
-    subgraph COMPUTE["Compute / Hyperviseurs"]
+    subgraph COMPUTE["Hypervisors"]
         direction TB
         Z240[z240\n100.100.0.9]
         RTX[rtx\n100.100.0.10]
         YOLO[yolo\n100.100.0.6]
     end
 
-    subgraph PLATFORM["Plateformes Kubernetes"]
+    subgraph PLATFORM["Kubernetes"]
         direction TB
         subgraph OCP["OpenShift - lab.virer.net"]
             direction TB
@@ -54,7 +54,7 @@ flowchart LR
     LAN --> COMPUTE
     LAN --> PLATFORM
     LAN --> SERVICES
-    RTX -. heberge .-> RP
+    RTX -. hosts .-> RP
 ```
 
 ## Inventory (Quick Reference)
