@@ -1,0 +1,35 @@
+apiVersion: v1beta1
+kind: AgentConfig
+metadata:
+  name: virer.net
+bootArtifactsBaseURL: http://nanopi/repo/ocp/agent/
+hosts: 
+  - hostname: sno1
+    role: master
+    interfaces:
+      - name: enp1s0
+        macAddress: 52:54:00:06:11:11
+    rootDeviceHints: 
+      deviceName: /dev/vda
+    networkConfig: 
+      interfaces:
+        - name: enp1s0
+          type: ethernet
+          state: up
+          mac-address: 52:54:00:06:11:11
+          ipv4:
+            enabled: true
+            address:
+              - ip: 100.100.0.111
+                prefix-length: 24
+            dhcp: false
+      dns-resolver:
+        config:
+          server:
+            - 100.100.0.1
+      routes:
+        config:
+          - destination: 0.0.0.0/0
+            next-hop-address: 100.100.0.1
+            next-hop-interface: enp1s0
+            table-id: 254
