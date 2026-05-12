@@ -1,0 +1,24 @@
+apiVersion: nmstate.io/v1      
+kind: NodeNetworkConfigurationPolicy
+metadata: 
+  name: rename-interface-vlan3-mac-000100050103
+spec:                          
+  nodeSelector:                
+    kubernetes.io/hostname: worker001.dmz.fqdn.example.com
+  desiredState:                
+    interfaces:                
+      - name: myethvlan3       
+        alt-names:
+        - name: myethvlan3
+        type: ethernet         
+        state: up              
+        identifier: mac-address
+        mac-address: '00:01:00:05:01:03'
+        ipv4:                  
+          enabled: true        
+          dhcp: true           
+          auto-gateway: false      
+          auto-routes: false       
+          auto-dns: false          
+        ipv6:                  
+          enabled: false      

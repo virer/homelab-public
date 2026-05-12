@@ -1,0 +1,16 @@
+# NIC=enp*
+SUBSYSTEM=="net" ACTION=="add", KERNEL=="enp*", ATTR{address}=="00:01:00:05:01:00", NAME="enp1s0"
+SUBSYSTEM=="net" ACTION=="add", KERNEL=="enp*", ATTR{address}=="00:01:00:05:01:03", NAME="myethvlan2"
+SUBSYSTEM=="net" ACTION=="add", KERNEL=="enp*", ATTR{address}=="00:01:00:05:01:04", NAME="myethvlan3"
+SUBSYSTEM=="net" ACTION=="add", KERNEL=="enp*", ATTR{address}=="00:01:00:05:01:05", NAME="myethvlan4"
+# NIC=eth*
+SUBSYSTEM=="net" ACTION=="add", KERNEL=="eth*", ATTR{address}=="00:01:01:05:02:00", NAME="enp2s0"
+SUBSYSTEM=="net" ACTION=="add", KERNEL=="eth*", ATTR{address}=="00:01:01:05:02:03", NAME="myethvlan2"
+SUBSYSTEM=="net" ACTION=="add", KERNEL=="eth*", ATTR{address}=="00:01:01:05:02:04", NAME="myethvlan3"
+SUBSYSTEM=="net" ACTION=="add", KERNEL=="eth*", ATTR{address}=="00:01:01:05:02:05", NAME="myethvlan4"
+# NIC=ens*
+SUBSYSTEM=="net" ACTION=="add", KERNEL=="ens*", ATTR{address}=="00:01:02:05:03:00", NAME="enp1s1"
+SUBSYSTEM=="net" ACTION=="add", KERNEL=="ens*", ATTR{address}=="00:01:02:05:03:03", NAME="myethvlan2"
+SUBSYSTEM=="net" ACTION=="add", KERNEL=="ens*", ATTR{address}=="00:01:02:05:03:04", NAME="myethvlan3"
+SUBSYSTEM=="net" ACTION=="add", KERNEL=="ens*", ATTR{address}=="00:01:02:05:03:05", NAME="myethvlan4"
+
