@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/fedora:44
+FROM registry.fedoraproject.org/fedora-minimal:44
 
 # set version label
 ARG VERSION
@@ -8,18 +8,19 @@ LABEL maintainer="ViReR"
 
 EXPOSE 7878 
 VOLUME /var/lib/radarr
+WORKDIR /opt/Radarr      
 
-RUN dnf install curl sqlite3 -y && dnf clean all 
+RUN dnf install curl sqlite3 libicu -y && dnf clean all 
 
 USER root
-RUN mkdir -p /opt/Radarr /var/lib/radarr && chown 1001:1001 /opt/Radarr /var/lib/radarr/
+RUN mkdir -p /var/lib/radarr && chown 1001:1001 /opt /var/lib/radarr/
 
 USER 1001
-WORKDIR /opt/Radarr
 
-ADD radarr.tar.gz .
-# COPY radarr.tar.gz .
+ADD radarr.tar.gz /opt/
+# COPY radarr.tar.gz /opt/
 # RUN tar -vzxf radarr.tar.gz && rm -f radarr.tar.gz
-RUN chmod a+x /opt/Radarr/Radarr && ls -l
+
+WORKDIR /opt/Radarr      
 
 CMD [ "/opt/Radarr/Radarr", "-nobrowser", "-data=/var/lib/radarr/" ]
