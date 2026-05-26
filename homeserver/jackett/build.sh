@@ -1,7 +1,7 @@
 #!/bin/bash 
 ###########
 export VERSION=0.24.1954
-export BUILD_VERSION=1
+export BUILD_VERSION=2
 ###########
 set -v
 
