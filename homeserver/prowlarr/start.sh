@@ -1,6 +1,6 @@
 #!/bin/bash
 
-podman run --name prowlarr --rm -d --network host -v /data/prowlarr:/opt/Prowlarr/.config:z -v /data/dl/:/data/dl/:z quay.io/$QUAY_USER/prowlarr:4.0.17.2952-2 
+podman run --name prowlarr --rm -d --network host -v /data/prowlarr:/opt/Prowlarr/.config:z -v /data/dl/:/data/dl/:z quay.io/$QUAY_USER/prowlarr:2.4.0.5397-1 
 
 # -p 9696:9696
 
