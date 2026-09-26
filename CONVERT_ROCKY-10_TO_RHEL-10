@@ -1,0 +1,17 @@
+# Convert Rocky10 to RHEL10
+
+
+
+
+Download rhel10 dvd iso, mount it and copy "RPM-GPG-KEY-redhat-release" and  "BaseOS/Packages/redhat-release-10*.rpm" file from the ISO
+
+Then do the following :
+# dnf install -y subscription-manager 
+# rpmkeys --import RPM-GPG-KEY-redhat-release
+# rpm -ivh --replacepkgs --nodeps redhat-release-10*.rpm
+# rpm -e --nodeps rocky-release rocky-repos rocky-gpg-keys 2>/dev/null || true
+# subscription-manager register --org xxxxx --activationkey xxxx
+# dnf clean all
+# dnf distro-sync -y --allowerasing
+# dnf reinstall -y kernel
+# reboot
