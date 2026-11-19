@@ -22,7 +22,7 @@ mkdir -p ~/opt
 rm -rf ~/opt/agent
 mv ~/.kube/config  ~/.kube/config.BAK
 
-mkdir -m 700 ~/opt/agent
+mkdir -pm 700 ~/opt/agent/openshift
 cp -v ocp-cfg/agent-config.yaml  ~/opt/agent/agent-config.yaml
 # cp -v ocp-cfg/agent-config-dhcp.yaml  ~/opt/agent/agent-config.yaml
 # cp -v examples/agent-config-ipv6.yaml  ~/opt/agent/agent-config.yaml
@@ -38,8 +38,36 @@ cp -v ocp-cfg/agent-config.yaml  ~/opt/agent/agent-config.yaml
 # cp -v ocp-cfg/4.18/install-config-agent-dual-stack.yaml ~/opt/agent/install-config.yaml
 cp -v ocp-cfg/4.21/install-config-agent-proxy-vCurrent.yaml ~/opt/agent/install-config.yaml
 
-
 cd ~/opt/agent
+
+        
+#############################
+# OCP 5 RHEL 10 network bug #
+#############################
+        
+        
+SCRIPT_B64=$(printf '#!/bin/bash\nif [ "$1" = "enp1s0" ] && [ "$2" = "up" ]; then\n  /usr/sbin/ethtool -K enp1s0 tx off rx off\n  /usr/sbin/ethtool -K br-ex tx off rx off\nfi\n' | base64 -w0)
+        
+cat << EOF > openshift/99-master-disable-offload.yaml
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: master
+  name: 99-master-disable-offload
+spec:   
+  config:
+    ignition:
+      version: 3.4.0
+    storage:
+      files:
+      - path: /etc/NetworkManager/dispatcher.d/99-disable-offload
+        mode: 0755
+        contents:
+          source: data:text/plain;charset=utf-8;base64,${SCRIPT_B64}
+EOF     
+        
+###
 
 # XXX Kernel boot mode XXX
 # $BIN agent create pxe-files
